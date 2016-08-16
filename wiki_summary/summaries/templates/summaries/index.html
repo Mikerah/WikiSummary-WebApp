@@ -1,5 +1,4 @@
 {% load bootstrap3 %}
-{% bootstrap_css %}
 
 <!DOCTYPE html>
 <html>
@@ -7,10 +6,17 @@
         <title>Wiki Summary</title>
         <meta charset="utf-8">
         <meta name="description" content="Read Summaries of Wikipedia Articles">
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
     </head>
     <body>
         <h1>WikiSummary</h1>
         <p>Read online summaries of wikipedia articles</p>
+        <form action="." method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Submit"/>
+        </form>
     </body>
 
 </html>
