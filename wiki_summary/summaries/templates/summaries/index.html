@@ -8,13 +8,32 @@
         <meta name="description" content="Read Summaries of Wikipedia Articles">
         {% bootstrap_css %}
         {% bootstrap_javascript %}
+        <script>
+            $(document).ready(function() {
+                
+               $("#options").click(function() {
+                    var selected = $(this).val();
+                    
+                    if (selected === 'Read an article'){
+                        $("#spec_art").toggle();
+                    }
+                    
+                    if(selected === 'Rean n random articles') {
+                        $("#num_art").toggle();
+                    }
+                    
+               }); 
+            });
+        </script>
     </head>
     <body>
         <h1>WikiSummary</h1>
         <p>Read online summaries of wikipedia articles</p>
         <form action="." method="post">
             {% csrf_token %}
-            {{ form }}
+            {{ form.options }}
+            {{ form.specific_article }}
+            {{ form.number_of_random_articles }}
             <input type="submit" value="Submit"/>
         </form>
     </body>
