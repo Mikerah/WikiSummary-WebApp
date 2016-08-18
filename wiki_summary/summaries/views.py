@@ -14,7 +14,23 @@ def get_wanted_article(article):
         full_article = article_page.url
     )
     return wanted_article_model
-
+    
+def get_wanted_articles(number_of_articles):
+    list_of_articles = []
+    for i in range(number_of_articles):
+        try:
+            rand_article = wikipedia.random()
+            page = wikipedia.WikipediaPage(rand_article)
+            article = Article(
+                title = page.title,
+                content = page.summary,
+                full_article = page.url
+            )
+            list_of_articles.append(article)
+        except wikipedia.exceptions.DisambiguationError:
+            rand_article = wikipedia_random()
+    return list_of_articles
+    
 def index(request):
     if request.method == 'POST':
         form = ArticleForm(request.POST)
@@ -27,7 +43,7 @@ def index(request):
                 return HttpResponseRedirect('/article.html')
             elif selection == '2':
                 number_of_art = form.cleaned_data['number_of_random_articles']
-                request.session['number_of_articles'] = number_of_art[:]
+                request.session['number_of_articles'] = number_of_art
                 return HttpResponseRedirect('/articles.html')
             else:
                 return HttpResponseRedirect('/infinite_articles.html')
@@ -42,7 +58,9 @@ def article(request):
     return render(request, 'summaries/article.html', {'article': wanted_article})
     
 def articles(request):
-    pass
+    number_of_articles = request.session['number_of_articles']
+    articles = get_wanted_articles(number_of_articles)
+    return render(request, 'summaries/articles.html', {'articles': articles, 'number_of_articles': range(number_of_articles)})
     
 def infinite_articles(request):
     pass
