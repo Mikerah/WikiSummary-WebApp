@@ -7,33 +7,42 @@
         <meta charset="utf-8">
         <meta name="description" content="Read Summaries of Wikipedia Articles">
         {% bootstrap_css %}
+        <style>
+        .hidden {
+            display: none;
+        }
+        </style>
+        
+        <script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
         {% bootstrap_javascript %}
         <script>
             $(document).ready(function() {
+            
+                $("#selections_0").click(function() {
+                    $("#spec_art").toggle();
+                });
                 
-               $("#options").click(function() {
-                    var selected = $(this).val();
-                    
-                    if (selected === 'Read an article'){
-                        $("#spec_art").toggle();
-                    }
-                    
-                    if(selected === 'Rean n random articles') {
-                        $("#num_art").toggle();
-                    }
-                    
-               }); 
+                $("#selections_1").click(function() {
+                    $("#num_art").toggle();
+                });
+                
             });
         </script>
     </head>
     <body>
+        <div class="jumbotron text-center">
         <h1>WikiSummary</h1>
         <p>Read online summaries of wikipedia articles</p>
+        </div>
         <form action="." method="post">
             {% csrf_token %}
             {{ form.options }}
+            <div id="spec_art" class="">
             {{ form.specific_article }}
+            </div>
+            <div id="num_art" class=""> 
             {{ form.number_of_random_articles }}
+            </div>
             <input type="submit" value="Submit"/>
         </form>
     </body>
