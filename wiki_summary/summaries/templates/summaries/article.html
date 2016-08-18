@@ -1,0 +1,23 @@
+{% load bootstrap3 %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Wiki Summary</title>
+        <meta charset="utf-8">
+        <meta name="description" content="Read Summaries of Wikipedia Articles">
+        {% bootstrap3 %}
+    </head>
+    
+    <body>
+        <div>
+            <h1>{{article.title}}</h1>
+            <p>{{article.content}}</p>
+            <a href="{{article.full_article}}" target="_blank">Full Article</a>
+        </div>
+        <form action="{% url 'index' %}">
+            <input type="submit" value="Another Article?"/>
+        </form>
+    
+    </body>
+</html>

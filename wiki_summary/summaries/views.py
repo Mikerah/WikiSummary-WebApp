@@ -6,6 +6,15 @@ from .models import Article
 
 import wikipedia
 
+def get_wanted_article(article):
+    article_page = wikipedia.WikipediaPage(article)
+    wanted_article_model = Article(
+        title = article_page.title,
+        content = article_page.summary,
+        full_article = article_page.url
+    )
+    return wanted_article_model
+
 def index(request):
     if request.method == 'POST':
         form = ArticleForm(request.POST)
@@ -28,7 +37,9 @@ def index(request):
     return render(request, 'summaries/index.html', {'form': form})
     
 def article(request):
-    pass
+    article_title = request.session['wanted_article']
+    wanted_article = get_wanted_article(article_title)
+    return render(request, 'summaries/article.html', {'article': wanted_article})
     
 def articles(request):
     pass
