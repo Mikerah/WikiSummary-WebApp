@@ -26,3 +26,13 @@ def index(request):
     else:
         form = ArticleForm()
     return render(request, 'summaries/index.html', {'form': form})
+    
+def article(request):
+    pass
+    
+def articles(request):
+    pass
+    
+def infinite_articles(request):
+    pass
+    
