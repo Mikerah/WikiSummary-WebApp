@@ -10,12 +10,14 @@
     </head>
     
     <body>
-        <div>
+        {% block header %}
+        <div class="jumbotron text-center">
             <h1>{{article.title}}</h1>
             <p>{{article.content}}</p>
             <a href="{{article.full_article}}" target="_blank">Full Article</a>
         </div>
-        <form action="{% url 'index' %}">
+        {% endblock header %}
+        <form class="text-right" action="{% url 'index' %}">
             <input type="submit" value="Another Article?"/>
         </form>
     

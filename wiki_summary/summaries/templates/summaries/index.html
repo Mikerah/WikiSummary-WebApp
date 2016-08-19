@@ -32,10 +32,12 @@
         </script>
     </head>
     <body>
+        {% block header %}
         <div class="jumbotron text-center">
         <h1>WikiSummary</h1>
         <p>Read online summaries of wikipedia articles</p>
         </div>
+        {% endblock header%}
         <div class="text-center">
             <form action="." method="post">
                 {% csrf_token %}
