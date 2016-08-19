@@ -8,15 +8,16 @@
         <meta name="description" content="Read Summaries of Wikipedia Articles">
         {% bootstrap_css %}
         <style>
-        .hidden {
+        .initiallyHidden {
             display: none;
         }
         </style>
         
         <script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
         {% bootstrap_javascript %}
-        <script>
+        <script type="text/javascript">
             $(document).ready(function() {
+                $("ul").addClass("list-unstyled list-inline");
             
                 $("#selections_0").click(function() {
                     $("#spec_art").toggle();
@@ -27,6 +28,7 @@
                 });
                 
             });
+            
         </script>
     </head>
     <body>
@@ -34,17 +36,19 @@
         <h1>WikiSummary</h1>
         <p>Read online summaries of wikipedia articles</p>
         </div>
-        <form action="." method="post">
-            {% csrf_token %}
-            {{ form.options }}
-            <div id="spec_art" class="">
-            {{ form.specific_article }}
-            </div>
-            <div id="num_art" class=""> 
-            {{ form.number_of_random_articles }}
-            </div>
-            <input type="submit" value="Submit"/>
-        </form>
+        <div class="text-center">
+            <form action="." method="post">
+                {% csrf_token %}
+                {{ form.options }}
+                <div id="spec_art" class="initiallyHidden">
+                    <p>{{ form.specific_article.label_tag }} {{ form.specific_article }}</p>
+                </div>
+                <div id="num_art" class="initiallyHidden"> 
+                    <p>{{ form.number_of_random_articles.label_tag }} {{ form.number_of_random_articles }}</p>
+                </div>
+                <input type="submit" value="Submit"/>
+            </form>
+        </div>
     </body>
 
 </html>
