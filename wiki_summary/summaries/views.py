@@ -62,6 +62,4 @@ def articles(request):
     articles = get_wanted_articles(number_of_articles)
     return render(request, 'summaries/articles.html', {'articles': articles, 'number_of_articles': range(number_of_articles)})
     
-def infinite_articles(request):
-    pass
     
