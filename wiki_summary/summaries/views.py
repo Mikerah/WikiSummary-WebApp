@@ -28,7 +28,7 @@ def get_wanted_articles(number_of_articles):
             )
             list_of_articles.append(article)
         except wikipedia.exceptions.DisambiguationError:
-            rand_article = wikipedia_random()
+            rand_article = wikipedia.random()
     return list_of_articles
     
 def index(request):
