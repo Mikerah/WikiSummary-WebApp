@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from django.contrib import messages 
 
 from .forms import ArticleForm
 from .models import Article
@@ -45,9 +46,7 @@ def index(request):
                 number_of_art = form.cleaned_data['number_of_random_articles']
                 request.session['number_of_articles'] = number_of_art
                 return HttpResponseRedirect('/articles.html')
-            else:
-                return HttpResponseRedirect('/infinite_articles.html')
-                
+            
     else:
         form = ArticleForm()
     return render(request, 'summaries/index.html', {'form': form})

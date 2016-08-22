@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'summaries',
     'bootstrap3',
+    'widget_tweaks',
 ]
 
 BOOTSTRAP3 = {

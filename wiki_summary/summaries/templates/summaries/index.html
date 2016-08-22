@@ -1,4 +1,5 @@
 {% load bootstrap3 %}
+{% load widget_tweaks %}
 
 <!DOCTYPE html>
 <html>
@@ -10,6 +11,9 @@
         <style>
         .initiallyHidden {
             display: none;
+        }
+        .error_message {
+            color: red;
         }
         </style>
         
@@ -39,7 +43,7 @@
         <div class="text-center">
             <form action="." method="post">
                 {% csrf_token %}
-                {{ form.options }}
+                {{ form.options|add_class:"list-unstyled list-inline" }}
                 <div id="spec_art" class="initiallyHidden">
                     <p>{{ form.specific_article.label_tag }} {{ form.specific_article }}</p>
                 </div>
@@ -47,9 +51,12 @@
                     <p>{{ form.number_of_random_articles.label_tag }} {{ form.number_of_random_articles }}</p>
                 </div>
                 <input class="btn btn-primary" type="submit" value="Submit"/>
+                {% for k, message in form.errors.items %}
+                    <p style="color:red;"> {{message}}</p>
+                {% endfor %}
             </form>
         </div>
-        <footer>
+        <footer class="text-right">
             <a href="https://github.com/Mikerah/WikiSummary-WebApp">View Source Code on Github</a>
         </footer>
     </body>
